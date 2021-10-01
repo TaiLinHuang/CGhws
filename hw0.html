@@ -46,7 +46,7 @@ function init () {
 	
 	window.addEventListener('resize', onWindowResize, false);
 	///////////////////////////////////////////////////////////////
-	var geometry = new THREE.CylinderGeometry( 1, 1, 2, 32 );
+	var geometry = new THREE.CylinderGeometry( 1, 1, 1, 32 );
 	var material = new THREE.MeshNormalMaterial();
 	var cylinder = new THREE.Mesh( geometry, material );
 	scene.add( cylinder );	
