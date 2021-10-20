@@ -141,15 +141,13 @@ function turnSixDegs(){
   setTimeout(turnSixDegs,1000);
   }
   else if(angle==0){
-    ring();
-	reset();
+    reset();
+	ring();
   }
 }
 function ring() {
   document.getElementById('bee').play();
-  alert("時間到了");
-  //document.getElementById('bee').pause();
-  return;  
+  alert("時間到了");  
 }
 
 function onWindowResize() {
