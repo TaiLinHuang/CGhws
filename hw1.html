@@ -140,13 +140,14 @@ function turnSixDegs(){
   group.rotation.z += Math.PI/30; 
   setTimeout(turnSixDegs,1000);
   }
-  else{
+  else if(angle==0){
     ring();
+	reset();
   }
 }
 function ring() {
   document.getElementById('bee').play();
-  setTimeout(function(){alert("時間到了");},1000);
+  alert("時間到了");
   //document.getElementById('bee').pause();
   return;  
 }
