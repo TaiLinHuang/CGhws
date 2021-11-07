@@ -43,25 +43,25 @@ animate();
 
 function buildVehicle() {
   var car = new THREE.Object3D();
-  var b1 = new THREE.Mesh(new THREE.BoxGeometry(12, 10, 8), new THREE.MeshNormalMaterial());
+  var b1 = new THREE.Mesh(new THREE.BoxGeometry(12, 8, 8), new THREE.MeshPhongMaterial());
   b1.position.set(-2, 5, 0);
-  rect = new THREE.Mesh(new THREE.BoxGeometry(20, 5, 10), new THREE.MeshNormalMaterial());
+  rect = new THREE.Mesh(new THREE.BoxGeometry(20, 5, 10), new THREE.MeshPhongMaterial());
   rect.position.set(0, 2.5, 0);
   car.add(b1, rect);
   return car;
 }
 
 function buildObstacle() {
-  cylinder1 = new THREE.Mesh(new THREE.CylinderGeometry(10, 10, 30, 32), new THREE.MeshLambertMaterial());
+  cylinder1 = new THREE.Mesh(new THREE.CylinderGeometry(10, 10, 30, 32), new THREE.MeshPhongMaterial());
   cylinder1.position.set(75, 15, -75);
 
-  cylinder2 = new THREE.Mesh(new THREE.CylinderGeometry(20, 20, 30, 32), new THREE.MeshLambertMaterial());
+  cylinder2 = new THREE.Mesh(new THREE.CylinderGeometry(20, 20, 30, 32), new THREE.MeshPhongMaterial());
   cylinder2.position.set(-75, 15, -75);
 
-  cylinder3 = new THREE.Mesh(new THREE.CylinderGeometry(5, 5, 30, 32), new THREE.MeshLambertMaterial());
+  cylinder3 = new THREE.Mesh(new THREE.CylinderGeometry(5, 5, 30, 32), new THREE.MeshPhongMaterial());
   cylinder3.position.set(-75, 15, 75);
 
-  cylinder4 = new THREE.Mesh(new THREE.CylinderGeometry(15, 15, 30, 32), new THREE.MeshLambertMaterial());
+  cylinder4 = new THREE.Mesh(new THREE.CylinderGeometry(15, 15, 30, 32), new THREE.MeshPhongMaterial());
   cylinder4.position.set(75, 15, 75);
 
   Obstacle = new THREE.Group();
