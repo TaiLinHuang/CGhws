@@ -5,25 +5,26 @@ class Candle {
 	constructor (x=0,z=0) {		
 		this.candle = new THREE.Group();
 		let body = new THREE.Mesh (new THREE.CylinderGeometry(5,5,20,64), new THREE.MeshNormalMaterial());
-		body.position.set(x,10.1,z);
 		let loader = new THREE.TextureLoader();
 		loader.load('https://i.imgur.com/M2tr5Tm.png?1%27',
 			function(texture) {
-			flameMesh = new THREE.Mesh(new THREE.PlaneGeometry(30,30), new THREE.MeshBasicMaterial({map:texture,alphaTest:0.5}));
+			flameMesh = new THREE.Mesh(new THREE.PlaneGeometry(30,30), new THREE.MeshBasicMaterial({map:texture,alphaTest:0.5,side:THREE.DoubleSide}));
 			texture.wrapS = THREE.RepeatWrapping;
 			texture.wrapT = THREE.RepeatWrapping;
 			texture.repeat.set (1/3,1/3);
 			texture.offset.set (0,2/3);
-			flameMesh.position.set(x,28,z);
+			flameMesh.position.set(0,20,0);
+			body.add(flameMesh);
 			},
 			undefined,
 			function(xhr) {
 			console.log('An error happened');
 			}
 		);
+		body.position.set(x,10.1,z);
 		let light = new THREE.PointLight(0xFFF4A1,0.5);
 		light.position.set(x,10,z);
-		this.candle.add(body,flameMesh,light);
+		this.candle.add(body,light);
 		scene.add (this.candle);
 		this.flameInterval = setInterval (this.textureAnimate, 100);
    }
