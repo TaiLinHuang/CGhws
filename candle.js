@@ -7,7 +7,7 @@ class Candle {
 		let body = new THREE.Mesh (new THREE.CylinderGeometry(5,5,20,64), new THREE.MeshNormalMaterial());
 		body.position.set(x,10.1,z);
 		let loader = new THREE.TextureLoader();
-		loader.load('http://i.imgur.com/M2tr5Tm.png',
+		loader.load('https://i.imgur.com/M2tr5Tm.png',
 			function(texture) {
 			flameMesh = new THREE.Mesh(new THREE.PlaneGeometry(30,30), new THREE.MeshBasicMaterial({map:texture,alphaTest:0.5}));
 			texture.wrapS = THREE.RepeatWrapping;
@@ -30,7 +30,7 @@ class Candle {
 	textureAnimate() {
 		this.count = (this.count === undefined) ? 1 : this.count;
 		if (flameMesh!== undefined) {
-			this.texture = this.flameMesh.material.map;
+			this.texture = flameMesh.material.map;
 			this.texture.offset.x += 1/3;
  		if (textureAnimate.count % 3 === 0) {
 			this.texture.offset.y -= 1/3;
