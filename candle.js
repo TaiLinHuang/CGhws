@@ -32,7 +32,7 @@ class Candle {
 		if (flameMesh!== undefined) {
 			this.texture = flameMesh.material.map;
 			this.texture.offset.x += 1/3;
- 		if (textureAnimate.count % 3 === 0) {
+ 		if (this.count % 3 === 0) {
 			this.texture.offset.y -= 1/3;
 			}
 		this.count++;
