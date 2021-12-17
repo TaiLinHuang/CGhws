@@ -6,7 +6,7 @@ class Candle {
 		this.candle = new THREE.Group();
 		let body = new THREE.Mesh (new THREE.CylinderGeometry(5,5,20,64), new THREE.MeshNormalMaterial());
 		let loader = new THREE.TextureLoader();
-		loader.load('https://i.imgur.com/M2tr5Tm.png?1%27',
+		loader.load('http://i.imgur.com/M2tr5Tm.png?1%27',
 			function(texture) {
 			flameMesh = new THREE.Mesh(new THREE.PlaneGeometry(30,30), new THREE.MeshBasicMaterial({map:texture,alphaTest:0.5,side:THREE.DoubleSide}));
 			texture.wrapS = THREE.RepeatWrapping;
