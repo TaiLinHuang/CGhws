@@ -5,6 +5,7 @@ import { Candle } from "./candle.js";
 var renderer, camera, scene;
 var candles = [];
 
+
 function init() {
 	renderer = new THREE.WebGLRenderer();
 	document.body.appendChild (renderer.domElement);
