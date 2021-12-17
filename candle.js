@@ -49,20 +49,5 @@ class Candle {
 		this.light.intensity = 0;
 		setTimeout(function(){this.flameMesh.material.visible = true;this.light.intensity = 0.3;}, 3000);
 	} */
-	
-	flameOut() {
-		
-		console.log(this.candle);
-		this.light.intensity = 0;
-		this.candle.children[0].children[0].material.visible = false;
-		setTimeout(this.ignition.bind(this), 2000);
-	}
-	
-	ignition() {
-		
-		console.log(this.candle);
-		this.candle.children[0].children[0].material.visible = true;
-		this.light.intensity = 0.4;
-	}
 }
 export { Candle };

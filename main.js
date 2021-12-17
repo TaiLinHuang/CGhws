@@ -1,7 +1,6 @@
 import * as THREE from "https://threejs.org/build/three.module.js";
 import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js";
 import { Candle } from "./candle.js";
-
 var renderer, camera, scene;
 var candles = [];
 var raycaster = new THREE.Raycaster();
@@ -21,40 +20,39 @@ function init() {
 	///////////////////////////
 	let floor = new THREE.Mesh (new THREE.PlaneGeometry(300,300), new THREE.MeshPhongMaterial({side:THREE.DoubleSide}));
 	floor.rotation.x = -Math.PI/2;	
-	scene.add (floor);	
-	
+	scene.add (floor);
 	var c0 = new Candle(0, 0);
 	var c1 = new Candle(50, 0);
 	var c2 = new Candle(100, 0);
 	var c3 = new Candle(-50, 0);
 	var c4 = new Candle(-100, 0);
-	
+	candles.push(c0,c1,c2,c3,c4);
 	window.addEventListener( 'click', onMouseClick, false );
 	window.requestAnimationFrame(render);
 };
 function onMouseClick( event ) {
- 
     mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
     mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
     raycaster.setFromCamera( mouse, camera );
     var intersects = raycaster.intersectObjects( scene.children );
-    for ( var i = 0; i < intersects.length; i++ ) {
-		setTimeout(intersects[ i ].object.material.color.set( 0xff0000 ), 3000);
-        //intersects[ i ].object.material.color.set( 0xff0000 );
-		//intersects[ i ].Object.material.visible = false;
+    for ( var i = 1; i < intersects.length; i++ ) {
+		intersects[ i ].children[0].children[0].material.visible = false;
+        intersects[ i ].children[1].material.intensity = 0;
+		setTimeout(function(){
+			intersects[ i ].children[0].children[0].material.visible  = true;
+			intersects[ i ].children[1].material.intensity = 0.3;}, 3000);
     }
-}
+};
 function render() {
     renderer.render(scene, camera);
-}
+};
 function onWindowResize() {
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
 	renderer.setSize(window.innerWidth, window.innerHeight);
-}
+};
 function animate() {
 	requestAnimationFrame(animate);
 	render();
-}
+};
 export {init, animate, scene};
