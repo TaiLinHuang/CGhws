@@ -4,7 +4,8 @@ import { Candle } from "./candle.js";
 
 var renderer, camera, scene;
 var candles = [];
-
+var raycaster = new THREE.Raycaster();
+var mouse = new THREE.Vector2();
 function init() {
 	renderer = new THREE.WebGLRenderer();
 	document.body.appendChild (renderer.domElement);
@@ -12,52 +13,48 @@ function init() {
 	var height = window.innerHeight;
 	renderer.setSize (width, height);
 	renderer.setClearColor (0x888888);
-
 	scene = new THREE.Scene();
-
 	camera = new THREE.PerspectiveCamera (50, width/height, 1, 10000);
 	camera.position.set (0,200,300);
-	
 	let controls = new OrbitControls(camera, renderer.domElement);
+	window.addEventListener('resize', onWindowResize, false);
 	///////////////////////////
 	let floor = new THREE.Mesh (new THREE.PlaneGeometry(300,300), new THREE.MeshPhongMaterial({side:THREE.DoubleSide}));
 	floor.rotation.x = -Math.PI/2;	
 	scene.add (floor);	
-
-	candles.push (new Candle(0,0),new Candle(50,0),new Candle(100,0),new Candle(-50,0),new Candle(-100,0));
-
+	
+	var c0 = new Candle(0, 0);
+	var c1 = new Candle(50, 0);
+	var c2 = new Candle(100, 0);
+	var c3 = new Candle(-50, 0);
+	var c4 = new Candle(-100, 0);
+	
+	window.addEventListener( 'click', onMouseClick, false );
+	window.requestAnimationFrame(render);
 };
-function update(evt) {	///keyboard.ver///
+function onMouseClick( event ) {
+ 
+    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-	if (evt.key == 1) {
-
-		candles[0].flameOut();
-	}
-	if (evt.key == 2) {
-
-		candles[1].flameOut();
-	}
-	if (evt.key == 3) {
-
-		candles[2].flameOut();
-	}
-	if (evt.key == 4) {
-
-		candles[3].flameOut();
-	}
-	if (evt.key == 5) {
-
-		candles[4].flameOut();
-	}
+    raycaster.setFromCamera( mouse, camera );
+    var intersects = raycaster.intersectObjects( scene.children );
+    for ( var i = 0; i < intersects.length; i++ ) {
+		setTimeout(intersects[ i ].object.material.color.set( 0xff0000 ), 3000);
+        //intersects[ i ].object.material.color.set( 0xff0000 );
+		//intersects[ i ].Object.material.visible = false;
+    }
+}
+function render() {
+    renderer.render(scene, camera);
+}
+function onWindowResize() {
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize(window.innerWidth, window.innerHeight);
 }
 function animate() {
-	requestAnimationFrame (animate);
-	renderer.render (scene, camera);
-	
-	window.onkeydown = function(evt){
-		var evt = window.event?window.event:evt;
-		update(evt);
-	}
-};
-
+	requestAnimationFrame(animate);
+	render();
+}
 export {init, animate, scene};
