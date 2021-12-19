@@ -2,6 +2,7 @@ import * as THREE from "https://threejs.org/build/three.module.js";
 import {scene} from './main.js';
 var flameMesh;
 var candle;
+var candle_name=1;
 class Candle {
 	constructor (x=0,z=0) {		
 		this.candle = new THREE.Group();
@@ -28,6 +29,8 @@ class Candle {
 		let light = new THREE.PointLight(0xFFF4A1,0.3);
 		light.position.set(x,10,z);
 		this.candle.add(body,light);
+		this.candle.name= 'C'+candle_name;
+		candle_name++;
 		scene.add (this.candle);
 		this.flameInterval = setInterval (this.textureAnimate.bind(this), 100);
    }
@@ -44,10 +47,17 @@ class Candle {
 		this.count++;
 		}
 	}
-	/*flameOff() {
-		this.flameMesh.material.visible = false;
+	flameOff() {
+		this.candle.children[0].children[0].material.visible = false;
+		this.candle.children[1].intensity = 0;
+		setTimeout(this.flameOn.bind(this), 3000);
+		/*this.flameMesh.material.visible = false;
 		this.light.intensity = 0;
-		setTimeout(function(){this.flameMesh.material.visible = true;this.light.intensity = 0.3;}, 3000);
-	} */
+		setTimeout(function(){this.flameMesh.material.visible = true;this.light.intensity = 0.3;}, 3000);*/
+	}
+	flameOn() {
+		this.candle.children[0].children[0].material.visible = true;
+		this.candle.children[1].intensity = 0.3;
+	} 
 }
 export { Candle };
