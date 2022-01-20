@@ -3,6 +3,7 @@ import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitCo
 import { Candle } from "./candle.js";
 var renderer, camera, scene;
 var candles = [];
+var pickables = [];
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 function init() {
@@ -27,6 +28,7 @@ function init() {
 	var c4 = new Candle(50, 0);
 	var c5 = new Candle(100, 0);
 	candles.push(c1,c2,c3,c4,c5);
+	pickables.push(c1.candle,c2.candle,c3.candle,c4.candle,c5.candle);
 	window.addEventListener( 'click', onMouseClick, false );
 	window.requestAnimationFrame(render);
 	//console.log(scene.children);
@@ -36,14 +38,14 @@ function onMouseClick( event ) {
     mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
     raycaster.setFromCamera( mouse, camera );
     //var intersects = raycaster.intersectObjects( scene.children );
-	var intersects = raycaster.intersectObjects(candles, true);
+	var intersects = raycaster.intersectObjects(pickables, true);
 	console.log(intersects[0].Object.name);
 	if (intersects.length > 0) {
-		if(intersects[0].Object.name=='C1')candles[1].flameOff();
-		if(intersects[0].Object.name=='C2')candles[2].flameOff();
-		if(intersects[0].Object.name=='C3')candles[3].flameOff();
-		if(intersects[0].Object.name=='C4')candles[4].flameOff();
-		if(intersects[0].Object.name=='C5')candles[5].flameOff();
+		if(intersects[0].Object.parent.name=='C1')candles[1].flameOff();
+		if(intersects[0].Object.parent.name=='C2')candles[2].flameOff();
+		if(intersects[0].Object.parent.name=='C3')candles[3].flameOff();
+		if(intersects[0].Object.parent.name=='C4')candles[4].flameOff();
+		if(intersects[0].Object.parent.name=='C5')candles[5].flameOff();
 	}
 };
 function render() {

@@ -28,7 +28,8 @@ class Candle {
 		body.position.set(x,10.1,z);
 		let light = new THREE.PointLight(0xFFF4A1,0.3);
 		light.position.set(x,10,z);
-		this.candle.add(body,light);
+		this.candle.add(light);
+		this.candle.add(body);
 		this.candle.name= 'C'+candle_name;
 		candle_name++;
 		scene.add (this.candle);
