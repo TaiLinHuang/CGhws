@@ -1,5 +1,5 @@
 import * as THREE from "https://threejs.org/build/three.module.js";
-import {scene} from './main.js';
+import {scene} from './hw4_main.js';
 var flameMesh;
 var candle;
 var candle_name=1;

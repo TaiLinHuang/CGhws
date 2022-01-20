@@ -1,6 +1,6 @@
 import * as THREE from "https://threejs.org/build/three.module.js";
 import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js";
-import { Candle } from "./candle.js";
+import { Candle } from "./hw4_candle.js";
 var renderer, camera, scene;
 var candles = [];
 var pickables = [];
